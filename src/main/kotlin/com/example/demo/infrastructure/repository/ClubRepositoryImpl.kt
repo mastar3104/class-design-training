@@ -12,7 +12,7 @@ class ClubRepositoryImpl(
 ): ClubRepository {
     override fun find(clubId: ClubId): Club? {
         return database.clubs.find { it["id"] == clubId.toString() }?.let { resource ->
-            Club(
+            Club.reconstructor(
                 id = clubId,
                 name = resource["name"]!!,
                 numberOfEmployee = resource["numberOfEmployee"]!!.toInt()

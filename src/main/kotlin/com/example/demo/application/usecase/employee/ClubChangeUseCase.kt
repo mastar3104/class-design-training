@@ -1,6 +1,5 @@
 package com.example.demo.application.usecase.employee
 
-import com.example.demo.domain.entity.Club
 import com.example.demo.domain.repository.ClubRepository
 import com.example.demo.domain.repository.EmployeeRepository
 import com.example.demo.domain.value.ClubId
@@ -28,18 +27,7 @@ class ClubChangeUseCase(
 
         employeeRepository.save(newEmployee)
 
-        val updateOldClub = Club(
-            id = oldClub.id,
-            name = oldClub.name,
-            numberOfEmployee = oldClub.numberOfEmployee - 1,
-        )
-        clubRepository.save(updateOldClub)
-
-        val updateNewClub = Club(
-            id = newClub.id,
-            name = newClub.name,
-            numberOfEmployee = newClub.numberOfEmployee + 1,
-        )
-        clubRepository.save(updateNewClub)
+        clubRepository.save(oldClub.leaveEmployee())
+        clubRepository.save(newClub.joinEmployee())
     }
 }
