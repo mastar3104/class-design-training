@@ -1,7 +1,6 @@
 package com.example.demo.application.usecase.employee
 
 import com.example.demo.domain.entity.Club
-import com.example.demo.domain.entity.Employee
 import com.example.demo.domain.repository.ClubRepository
 import com.example.demo.domain.repository.EmployeeRepository
 import com.example.demo.domain.value.ClubId
@@ -24,13 +23,7 @@ class ClubDeleteUseCase(
         val oldClub = clubRepository.find(employee.clubId) ?: throw IllegalStateException("社員情報にひもづくクラブが存在しません。 クラブID:${employee.clubId}")
         val newClub = clubRepository.find(ClubId.NOT_BELONG) ?: throw IllegalArgumentException("該当のクラブ情報はありません。 クラブID:${ClubId.NOT_BELONG}")
 
-        val newEmployee = Employee(
-            id = employee.id,
-            name = employee.name,
-            teamId = employee.teamId,
-            clubId = ClubId.NOT_BELONG,
-            clubApproval = false,
-        )
+        val newEmployee = employee.deleteClub()
 
         employeeRepository.save(newEmployee)
 
