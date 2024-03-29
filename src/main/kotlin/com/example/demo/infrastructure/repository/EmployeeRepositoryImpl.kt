@@ -14,7 +14,7 @@ class EmployeeRepositoryImpl(
 ): EmployeeRepository {
     override fun find(employeeId: EmployeeId): Employee? {
         return database.employees.find { it["id"] == employeeId.toString() }?.let { resource ->
-            Employee(
+            Employee.reconstructor(
                 id = employeeId,
                 name = resource["name"]!!,
                 teamId = TeamId(resource["teamId"]!!),
