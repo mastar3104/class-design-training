@@ -29,7 +29,7 @@ class ClubDeleteUseCase(
             name = employee.name,
             teamId = employee.teamId,
             clubId = ClubId.NOT_BELONG,
-            clubApproval = employee.clubApproval,
+            clubApproval = false,
         )
 
         employeeRepository.save(newEmployee)
