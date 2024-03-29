@@ -15,14 +15,15 @@ class CreateUseCase(
         teamId: TeamId?,
         clubId: ClubId?,
     ) {
-        val employee = Employee.create(
+        val (employee, employeeChangeClubEvent) = Employee.create(
             name = name,
             teamId = teamId,
             clubId = clubId,
         )
 
         employeeRepository.save(
-            employee = employee
+            employee = employee,
+            employeeChangeClubEvent = employeeChangeClubEvent,
         )
     }
 }

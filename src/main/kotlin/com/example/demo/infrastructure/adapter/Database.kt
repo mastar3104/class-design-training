@@ -87,4 +87,26 @@ class Database {
             _clubs[index] = resource
         }
     }
+
+    fun clubAddNumberOfEmployee(id: String) {
+        val index = clubs.indexOfFirst { it["id"] == id }
+        if (index != -1) {
+            _clubs[index] = mapOf(
+                "id" to _clubs[index]["id"]!!,
+                "name" to _clubs[index]["name"]!!,
+                "numberOfEmployee" to (_clubs[index]["numberOfEmployee"]!!.toInt() + 1).toString(),
+            )
+        }
+    }
+
+    fun clubSubNumberOfEmployee(id: String) {
+        val index = clubs.indexOfFirst { it["id"] == id }
+        if (index != -1) {
+            _clubs[index] = mapOf(
+                "id" to _clubs[index]["id"]!!,
+                "name" to _clubs[index]["name"]!!,
+                "numberOfEmployee" to (_clubs[index]["numberOfEmployee"]!!.toInt() - 1).toString(),
+            )
+        }
+    }
 }
